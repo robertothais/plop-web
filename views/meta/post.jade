@@ -1,0 +1,11 @@
+title 
+  | ¡Plop! - #{post.title}
+link(rel='canonical', href="http://plop.pe/#{post.shortCode}")
+meta(property='og:title', content=post.title)
+meta(property='og:locale', content='es_LA')
+meta(property='og:site_name', content='¡Plop!')
+meta(property='og:description', content='Para que te caigas de la risa')
+meta(property='og:type', content='article')
+meta(property='og:url', content="http://plop.pe/r/#{post.shortCode}")
+meta(property='og:image', content=post.imageUrl('medium'))
+meta(property='article:published_time', content=post.createdAt().toISOString())

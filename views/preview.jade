@@ -1,0 +1,31 @@
+article.preview
+  .row
+    .span6
+      h3  
+        a.title(href='#')      
+        
+  .row
+    .span6
+      a(href='#')
+        img.image(width='504')
+
+    .span3
+  
+      .plops.clearfix
+        button.btn.btn-large.plop
+          img(src=img('plop.png'), height=30, width=30)
+        .votes
+
+      div.clearfix        
+        button.btn.btn-large.share.facebook
+          img(src=img('facebook-icon.png'))
+          span Compartir
+
+        button.btn.btn-large.share.twitter
+          img(src=img('twitter-icon.png'))
+          span Twittear
+
+      .creator
+        span.username
+        time.timeago
+        

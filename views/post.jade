@@ -1,0 +1,28 @@
+article.post
+  .info.row
+    .span7
+      h1.title
+      span.username
+      time.timeago
+    .span2
+      button.btn.btn-large.plop
+        img(src=img('plop.png'), height=30, width=30)
+    .span9      
+      .social
+        button.btn.share.facebook
+          img(src=img('facebook-icon.png'))
+          span Compartir
+        button.btn.share.twitter
+          img(src=img('twitter-icon.png'))
+          span Twittear
+        .fb-like(data-send="false", data-layout="button_count", data-width="110px", data-show-faces="false")
+        .g-plusone
+      .votes
+
+  .row
+    .span9.main
+      img.image
+
+  .row
+    .span9.comments
+      .fb-comments(data-num-posts="4", data-width="758")

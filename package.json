@@ -1,0 +1,39 @@
+{
+  "description": "Plop",
+  "version": "0.1.0-181",
+  "private": true,
+  "dependencies": {
+    "async": "0.1.18",
+    "connect-assets": "git://github.com/TrevorBurnham/connect-assets.git",
+    "express": "2.5.x",
+    "stylus": "0.24.x",
+    "nib": "0.3.x",
+    "jade": "0.21.x",
+    "socket.io": "0.9.4",
+    "mongoose": "2.5.10",
+    "request": "2.9.x",
+    "connect-redis": "1.2.x",
+    "redis": "0.7.x",
+    "airbrake": "git://github.com/rpbertp13/node-airbrake.git"
+  },
+  "devDependencies": {
+    "api-easy": "0.3.2",
+    "vows": "0.6.1",
+    "forever": "0.8.x"
+  },
+  "scripts": {
+    "test": "vows --spec",
+    "start": "node lib/app.js",
+    "dev": "PORT=3000 NODE_ENV=development forever --watch . lib/app.js",
+    "debug": "PORT=3000 NODE_ENV=development node --debug-brk lib/app.js"
+  },
+  "engines": {
+    "node": "v0.6.x"
+  },
+  "name": "plop",
+  "subdomain": "plop",
+  "domains": [
+    "www.plop.pe",
+    "plop.pe"
+  ]
+}

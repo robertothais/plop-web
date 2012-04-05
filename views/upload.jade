@@ -1,0 +1,53 @@
+#upload.modal.fade
+  form.form-horizontal(action="http://api2.transloadit.com/assemblies", enctype="multipart/form-data", method="POST")
+    .modal-header
+      a.close(data-dismiss='modal') ×
+      h2 Subir Imágen
+    .modal-body.row
+      .span4               
+        input(type='hidden', name='params', value='{&quot;template_id&quot;:&quot;6514754f0fc9428981d82cf6d2d20f11&quot;,&quot;auth&quot;:{&quot;max_size&quot;:4194304,&quot;key&quot;:&quot;a62d287a20e94ba5aabb45e7a36282b5&quot;}}')
+        fieldset
+          .control-group
+            label.control-label Archivo
+            .controls
+              input.span3(type='file', accept='image/*', name='file')
+              p.help-block
+                span.error-message
+
+          .control-group
+            label.control-label Título
+            .controls
+              input.span3(type='text', name='title', maxlength=100)
+              p.help-block
+                span.error-message  
+                span.prompt Escoge un título que sea de lo mejor
+
+          .control-group.username
+            label.control-label Nick
+            .controls
+              input.span3(type='text', name='username', maxlength=30)
+              p.help-block
+                span.error-message
+                span.prompt Sólo para la primera vez
+
+          .control-group
+            .controls
+              label.checkbox.rules
+                input(type='checkbox', value='accept', name='accept')
+                span Acepto las reglas
+                p.help-block
+                  span.error-message                  
+      .span3
+          .well
+            h4 Reglas del juego
+            ul  
+              li Nada de contenido ilegal
+              li Que sea divertido
+              li TOmar un poco más!
+
+    .modal-footer
+      .progress.progress-info
+        .bar
+          span Procesando
+      button.btn.btn-primary.btn-large(type='submit', data-loading-text='Enviando...') Aceptar
+      .cancel.btn.btn-large(data-dismiss='modal') Cancelar  

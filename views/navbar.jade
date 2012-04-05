@@ -1,0 +1,27 @@
+nav#nav.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+      a.brand(href='#')
+        img(src=img('logo-small.png'), alt='¡Plop!')
+      ul.nav
+        li.new-upload
+          a(href='#') 
+            img(src=img('cloud.png'), alt='Subir')
+            span Subir
+        li.divider-vertical
+        li.random
+          a(href='#')
+            span Shuffle
+
+      ul.nav.pull-right.session
+        li.login
+          a(href="#") Entrar
+        li.user.dropdown   
+          a.user.dropdown-toggle(href="#", data-toggle="dropdown")
+            span.no-username Opciones
+            span.username 
+            span.karma
+            b.caret
+          ul.dropdown-menu
+            li
+              a.logout(href="#") Salir

@@ -1,0 +1,48 @@
+!!!5
+html
+  head(prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#")
+    script var _sf_startpt=(new Date()).getTime();var Plop = {sid: '#{sid}', env: '#{config.environment}'}
+    != css('application')    
+    // [if lt IE 9]
+      script(src='//html5shiv.googlecode.com/svn/trunk/html5.js')
+    //<![endif]
+    meta(property='fb:app_id', content=config.facebook.app_id)
+    if typeof post != 'undefined'
+      != partial('meta/post', { locals: { post: post } })
+      script Plop.load = !{post.toJson()}
+    else
+      != partial('meta/site', { locals: { title: title } })
+
+  body
+    #fb-root
+    include navbar                
+    .container
+      .row
+        section.span9
+          ul#tabs.nav.nav-tabs
+              li(data-tab-name="hot")
+                a(href="#") Lo Mejor
+              li(data-tab-name="new")
+                a(href="#") Lo Nuevo
+          .module          
+            #posts
+
+        section.span3
+          .module
+            h4 Tu sabes que te gusta
+            .fb-like(data-send="false", data-layout="standard", data-width="226px", data-show-faces="true", data-href="https://www.facebook.com/pages/Plop/100430726755589")
+
+    
+    #loader(style='background-image:url(#{img('loader.gif')})')
+    a#back-to-top.offscreen
+      strong Arriba
+
+    script Plop.templates = !{templates.partials()}
+    script(src="/socket.io/socket.io.js")
+    != js('application')
+    
+    if process.env.NODE_ENV == 'development'
+      script Hoptoad.suppress()
+      script Plop.debug = true
+    else
+      include chartbeat.html
