@@ -1,4 +1,4 @@
-;var Plates = (typeof process !== 'undefined' && typeof process.title !== 'undefined') ? exports : {};
+var Plates = (typeof process !== 'undefined' && typeof process.title !== 'undefined') ? exports : {};
 
 !function(exports) {
 
@@ -10,14 +10,14 @@
   var Merge = function Merge() {};
 
   Merge.prototype = {
-    
+
     nest: [],
 
     tag: new RegExp([
       '<',
       '(/?)', // 2 - is closing
       '([-:\\w]+)', // 3 - name
-      '((?:[-\\w]+(?:', '=', 
+      '((?:[-\\w]+(?:', '=',
       '(?:\\w+|["|\'](?:.*)["|\']))?)*)', // 4 - attributes
       '(/?)', // 5 - is self-closing
       '>'
@@ -56,7 +56,7 @@
           output += this.bind(segment, data);
 
         }
-        
+
         return output;
 
       }
@@ -69,8 +69,8 @@
         segment = segment.slice(components.input.length, -(tagname.length + 3));
         return output += this.bind(segment, value);
 
-      }    
-      
+      }
+
       return value;
 
     },
@@ -103,14 +103,13 @@
           closing,
           tagbody;
 
-      var c, 
+      var c,
           buffer = '',
           left;
-      
-      for (var i = 0, l = html.length; i < l; i++) {
 
+      for (var i = 0, l = html.length; i < l; i++) {
         c = html[i];
-        
+
         if (c === '!' && intag && !matchmode) {
           intag = false;
           buffer += html.slice(left, i+1);
@@ -124,10 +123,12 @@
 
           intag = false;
           tagbody = html.slice(left, i+1);
-            
           components = this.tag.exec(tagbody);
 
-          if(!components) { continue; }
+          if(!components) {
+            intag = true;
+            continue;
+          }
 
           isClosing = components[1];
           tagname = components[2];
@@ -156,10 +157,10 @@
             }
           }
 
-          if (attributes && !isClosing && !matchmode) {
+          if (!isClosing && !matchmode) {
 
             //
-            // if there is a match in progress and 
+            // if there is a match in progress and
             //
             if (mappings && mappings.length > 0) {
 
@@ -167,21 +168,40 @@
 
                 var setAttribute = false
                   , shouldSetAttribute = mappings[ii].re && attributes.match(mappings[ii].re);
-                
+
                 tagbody = tagbody.replace(this.attr, function(str, key, value, a) {
-                  
+
                   var newdata = mappings[ii].dataKey ? data[mappings[ii].dataKey] : data[key];
 
                   if (shouldSetAttribute && mappings[ii].replace !== key) {
+
                     return str;
                   }
-                  else if(shouldSetAttribute) {
+                  else if (shouldSetAttribute || typeof mappings[ii].replacePartial1 !== 'undefined') {
+
                     setAttribute = true;
+
+                    //
+                    // determine if we should use the replace argument or some value from the data object.
+                    //
+                    if (typeof mappings[ii].replacePartial2 !== 'undefined') {
+                      newdata = value.replace(mappings[ii].replacePartial1, mappings[ii].replacePartial2);
+                    }
+                    else if (typeof mappings[ii].replacePartial1 !== 'undefined' && mappings[ii].dataKey) {
+
+                      newdata = value.replace(mappings[ii].replacePartial1, data[mappings[ii].dataKey]);
+                    }
+
                     return key + '="' + (newdata || '') + '"';
                   }
                   else if (!mappings[ii].replace && mappings[ii].attribute === key) {
 
-                    if (mappings[ii].value === value || that.hasClass(value, mappings[ii].value || mappings.conf.where === key)) {
+                    if (
+                      mappings[ii].value === value || 
+                      that.hasClass(value, mappings[ii].value || 
+                      mappings.conf.where === key) ||
+                      ( ({}).toString.call(mappings[ii].value) === '[object RegExp]' && 
+                        mappings[ii].value.exec(value) !== null) ) {
 
                       var v = data[mappings[ii].dataKey];
 
@@ -190,24 +210,20 @@
                       if (isArray(v)) {
 
                         newdata = that.iterate(html, v, components, tagname, value);
-
-                        // If the item is an array, then we need to tell 
+                        // If the item is an array, then we need to tell
                         // Plates that we're dealing with nests
                         that.nest.push(tagname);
+                      } 
+                      else if (typeof v === 'object') {
 
-                      } else if (typeof v === 'object') {
                         newdata = tagbody + that.iterate(html, v, components, tagname, value);
                       }
 
                       buffer += newdata || '';
-
                       matchmode = true;
-
                     }
                   }
-
                   return str;
-
                 });
 
                 if (createAttribute && shouldSetAttribute && !setAttribute) {
@@ -219,21 +235,22 @@
                     if (isSelfClosing) {
                       close = ' ' + close;
                     }
-                  } 
+                  }
                   tagbody = [
                     left,
                     ' ',
                     mappings[ii].replace,
                     '="',
-                    data[mappings[ii].dataKey], 
+                    data[mappings[ii].dataKey],
                     '"',
                     close
                   ].join('');
                 }
+
               }
             }
             else {
-              
+
               //
               // if there is no map, we are just looking to match
               // the specified id to a data key in the data object.
@@ -247,11 +264,11 @@
                         nest = isArray(v),
                         output = (nest || typeof v === 'object') ? that.iterate(html, v, components, tagname, value) : v;
 
-                    // If the item is an array, then we need to tell 
+                    // If the item is an array, then we need to tell
                     // Plates that we're dealing with nests
                     if (nest) { that.nest.push(tagname); }
-                      
-                    buffer += nest? output : tagbody + output;
+
+                    buffer += nest ? output : tagbody + output;
                     matchmode = true;
                   }
                 }
@@ -293,19 +310,30 @@
   };
 
   function last(newitem) {
+    
     if (newitem) {
+
       this.mappings.push({});
     }
     var m = this.mappings[this.mappings.length-1];
-    if (m.attribute && m.value && m.dataKey && m.replace) {
+
+    if (m && m.attribute && m.value && m.dataKey && m.replace) {
       m.re = new RegExp(m.attribute + '=([\'"]?)' + m.value + '\\1');
+    
     } else {
-      delete m.re;
+    
+      delete m && m.re;
     }
     return m;
   }
 
   Mapper.prototype = {
+    replace: function(val1, val2) {
+      var l = last.call(this);
+      l.replacePartial1 = val1;
+      l.replacePartial2 = val2;
+      return this;
+    },
     use: function(val) {
       last.call(this).dataKey = val;
       return last.call(this) && this;
@@ -317,11 +345,22 @@
       last.call(this, true).attribute = val;
       return last.call(this) && this;
     },
-    class: function(val) {
+
+    "class": function(val) {
       return this.where('class').is(val);
     },
+    tag: function(val) {
+      last.call(this, true).tag = val;
+      return this;
+    },
+
     is: function(val) {
       last.call(this).value = val;
+      return last.call(this) && this;
+    },
+    has: function(val) {
+      last.call(this).value = val;
+      this.replace(val);
       return last.call(this) && this;
     },
     insert: function(val) {

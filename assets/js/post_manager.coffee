@@ -160,10 +160,10 @@ class Plop.PostManager extends EventEmitter
   prepareForRender: (post, template) ->
     data = $.extend {}, post
     if template is 'preview'
-      data.imageUrl = Plop.Util.assetUrl post.images.medium      
+      data.imageUrl = Plop.Util.assetUrl post.images.medium   
     else if template is 'post'
       data.imageUrl = Plop.Util.assetUrl post.images.large
-      data.url = this.url post.id
+    data.url = this.url post.id 
     data.votes = Plop.Util.addCommas data.votes
     $.extend data, post.creator
 
@@ -308,9 +308,9 @@ class Plop.PostManager extends EventEmitter
       map.class('timeago').to('createdAt').as 'datetime'
       map.class('image').to('imageUrl').as 'src' 
       map.class(type).to('id').as 'data-post-id'
-    post = @templates.post.map
-    post.class('fb-comments').to('url').as 'data-href'
-
+    @templates.post.map.class('fb-comments').to('url').as 'data-href'
+    @templates.preview.map.class('url').to('url').as 'href'
+    
   setWaypoint: =>
     callback = (event, direction) => 
       if direction is 'down' and @currentTab
