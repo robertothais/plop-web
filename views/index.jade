@@ -15,27 +15,29 @@ html
 
   body
     #fb-root
-    include navbar                
-    .container
-      .row
-        section.span9
-          ul#tabs.nav.nav-tabs
-              li(data-tab-name="hot")
-                a(href="#") Lo Mejor
-              li(data-tab-name="new")
-                a(href="#") Lo Nuevo
-          .module          
-            #posts
+    .wrapper
+      include navbar
+      .container
+        .row
+          section.span9
+            ul#tabs.nav.nav-tabs
+                li(data-tab-name="hot")
+                  a(href="#") Lo Mejor
+                li(data-tab-name="new")
+                  a(href="#") Lo Nuevo
+            .module          
+              #posts
 
-        section.span3
-          .module
-            h4 Tu sabes que te gusta
-            .fb-like(data-send="false", data-layout="standard", data-width="226px", data-show-faces="true", data-href="https://www.facebook.com/pages/Plop/100430726755589")
+          section.span3
+            .module
+              h4 Tu sabes que te gusta
+              .fb-like(data-send="false", data-layout="standard", data-width="226px", data-show-faces="true", data-href="https://www.facebook.com/pages/Plop/100430726755589")
+
+      #loader(style='background-image:url(#{img('loader.gif')})')     
+      a#back-to-top.offscreen
+        strong Arriba
+
       .push
-    
-    #loader(style='background-image:url(#{img('loader.gif')})')
-    a#back-to-top.offscreen
-      strong Arriba
 
     include footer
 
