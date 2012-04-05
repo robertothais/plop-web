@@ -31,11 +31,13 @@ html
           .module
             h4 Tu sabes que te gusta
             .fb-like(data-send="false", data-layout="standard", data-width="226px", data-show-faces="true", data-href="https://www.facebook.com/pages/Plop/100430726755589")
-
+      .push
     
     #loader(style='background-image:url(#{img('loader.gif')})')
     a#back-to-top.offscreen
       strong Arriba
+
+    include footer
 
     script Plop.templates = !{templates.partials()}
     script(src="/socket.io/socket.io.js")

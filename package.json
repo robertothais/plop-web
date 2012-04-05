@@ -1,6 +1,6 @@
 {
   "description": "Plop",
-  "version": "0.1.0-184",
+  "version": "0.1.0-185",
   "private": true,
   "dependencies": {
     "async": "0.1.18",

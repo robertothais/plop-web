@@ -28,9 +28,30 @@ $linkColor       = #3ab4d7
 @import 'bootstrap/popovers'
 @import 'bootstrap/type'
 
+html, body
+  height 100%
+
 body
   background-color #F2F3F4
   padding-top 70px
+
+.wrapper
+  min-height 100%
+  margin 0 auto -4em
+
+footer
+  height 51px
+  display none
+  margin-top: 40px
+  gradient-vertical($navbarBackground, #B50000)
+  $shadow = 0 -1px 3px rgba(0,0,0,.25), inset 0 1px 0 rgba(0,0,0,.1)
+  box-shadow($shadow)
+
+  .container
+    .span9
+      text-align center
+      padding-top 13px
+      padding-bottom 13px
 
 .clearfix
   clearfix()
@@ -61,6 +82,10 @@ a:focus
     padding-left 0
     padding-right 0
 
+body.no-more-posts
+  footer
+    display block
+
 body.showing-post
   .span9
     .module
@@ -68,6 +93,9 @@ body.showing-post
       padding-top 0
   #tabs
     display none
+
+  footer
+    display block
 
 .post
   .span9

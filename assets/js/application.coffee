@@ -31,8 +31,10 @@ class Plop.Application
     this.pipe 'login:error',        to:   @session
     this.pipe 'unauthenticated',    to:   @session
     this.pipe 'logout',             from: @session
+
     this.pipe 'karma:get',          from: @session
     this.pipe 'karma:update',       to:   @session
+    
     this.pipe 'username:save',      from: @session
 
     this.pipe 'post:create',        from: @uploader

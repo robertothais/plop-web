@@ -48,6 +48,12 @@ class Plop.PostManager extends EventEmitter
     this.on 'posts:appended', =>
       Plop.Tracker.event 'PostManager', 'posts:appended', @currentTab
 
+    this.on 'posts:nomore', =>
+      $('body').addClass('no-more-posts')
+
+    this.on 'posts:nomore', =>
+      Plop.Tracker.event 'PostManager', 'posts:nomore', @currentTab
+
     this.on 'post:created', (post) =>
       this.once 'post:shown', =>
         Plop.Util.delay 1000, =>
@@ -121,6 +127,7 @@ class Plop.PostManager extends EventEmitter
     this.setCurrentPost(post, node)    
     this.insert node
     $('body').addClass 'showing-post' 
+    $('body').removeClass('no-more-posts')
     window.scrollTo(0,0)   
     this.emit 'post:shown', post
     
@@ -132,9 +139,13 @@ class Plop.PostManager extends EventEmitter
     node = $ postHtml.join('')
     this.prepareForInsert node, 'preview'
     $('body').removeClass 'showing-post'
+    $('body').removeClass 'no-more-posts'
     this.insert node
     @skip += data.length
-    this.emit 'posts:appended'
+    if data.length
+      this.emit 'posts:appended'
+    else
+      this.emit 'posts:nomore'
 
   receive: (post, history) =>
     this.store post
