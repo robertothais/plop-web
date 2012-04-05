@@ -14,7 +14,13 @@ schema.statics.authenticate = (access_token, callback) ->
   async.waterfall [
     (next) ->
       request "https://graph.facebook.com/me?access_token=#{access_token}", (err, res, body) ->
-        next err, JSON.parse(body).id   
+        if !err && res.statusCode is 200
+          next null, JSON.parse(body).id   
+        else
+          err = new Error("Error when trying to get Facebook user")
+          err.type = 'FacebookApiError'
+          err.params = JSON.parse(body)
+          next err
     (facebookId, next) -> 
       User.findOne { facebookId: facebookId }, (err, user) ->        
         next err, user, facebookId
@@ -49,3 +55,5 @@ schema.methods.toJson = (obj) ->
   
 module.exports.schema = schema
 module.exports.model  = mongoose.model 'User', schema
+
+#{"error_code":1,"error_msg":"An unknown error occurred"}

@@ -28,6 +28,8 @@ class Plop.Application
 
     this.pipe 'login',              from: @session
     this.pipe 'login:success',      to:   @session
+    this.pipe 'login:error',        to:   @session
+    this.pipe 'unauthenticated',    to:   @session
     this.pipe 'logout',             from: @session
     this.pipe 'karma:get',          from: @session
     this.pipe 'karma:update',       to:   @session

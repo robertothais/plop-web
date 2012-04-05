@@ -48,7 +48,7 @@ class SocketApp
     User.authenticate accessToken, (err, user) =>
       if err 
         process.reportError err
-        @socket.emit 'login:failure'
+        @socket.emit 'login:error'
       else
         session.user =
           id: user.id

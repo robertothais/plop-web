@@ -18,7 +18,10 @@ class Plop.Session extends EventEmitter
       this.prepare()
 
     this.on 'login:success', (remoteUser) => this.isAuthenticated remoteUser
-    this.on 'login:failure', => this.resetAuthenticationState()
+    this.on 'login:error', => 
+      this.resetAuthenticationState()
+      this.hideModal()
+      FB.logout()
 
     this.on 'unauthenticated', => this.resetAuthenticationState()
 
@@ -63,7 +66,7 @@ class Plop.Session extends EventEmitter
             this.emit 'login', res.authResponse.accessToken
             
       when 'not_authorized', 'unknown'
-        this.emit 'logout'
+        this.emit 'logout' if @authenticated
         this.resetAuthenticationState()
     @authResponse = res
 
@@ -118,7 +121,6 @@ class Plop.Session extends EventEmitter
       .text(@remoteUser.username)
     @navElem.find('.no-username')
       .hide()
-
 
   resetReadyState: ->
       @ready = false

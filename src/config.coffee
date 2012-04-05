@@ -2,6 +2,7 @@ mongoose = require 'mongoose'
 redis    = require 'redis'
 socketRedis = require 'socket.io/node_modules/redis'
 url      = require 'url'
+http     = require 'http'
 
 class Config
 
@@ -11,7 +12,8 @@ class Config
     this.initMongo()
     this.initRedis()
     this.initFacebook()
-    this.socketConfig()    
+    this.initGlobalAgent()
+    this.socketConfig()
 
   initFacebook: ->
     @facebook = {}
@@ -51,6 +53,9 @@ class Config
       if @airbrake
         @airbrake.notify err
         console.error 'Sent to Errbit'
+
+  initGlobalAgent: ->
+    http.globalAgent.maxSockets = Infinity
 
   socketConfig: ->
     @socket = {}
