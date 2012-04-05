@@ -32,7 +32,9 @@ class Plop.Session extends EventEmitter
         @authFollowup = authFollowup
       this.showModal(message) if !this.authenticated 
 
-    @app.router.on 'logout', => FB.logout()
+    @app.router.on 'logout', => 
+      $('li.user.open', @navElem).removeClass('open')
+      FB.logout()
 
   prepare: ->
     this.emit 'session:prepare', @sid

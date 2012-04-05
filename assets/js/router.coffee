@@ -9,7 +9,7 @@ class Plop.Router extends EventEmitter
     this.addEvent 'click', 'body:not(.modal-open) li.login a', 'registration:show'
     this.addEvent 'click', 'body.modal-open li.login a', 'registration:hide'
 
-    this.addEvent 'click', 'a.logout', 'logout', null, false
+    this.addEvent 'click', 'a.logout', 'logout', null, true
 
     this.addEvent 'click', 'a.brand', 'index:show'
 
