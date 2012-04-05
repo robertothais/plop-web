@@ -241,7 +241,6 @@ class Plop.PostManager extends EventEmitter
     if url.postId?
       $('html,body').scrollTop(state.scrollTop)
     @skip = state.collection.length
-    this.setWaypoint()
 
   makeTitle: (sub) ->
     "¡Plop! - #{sub}"
@@ -310,7 +309,7 @@ class Plop.PostManager extends EventEmitter
       map.class(type).to('id').as 'data-post-id'
     @templates.post.map.class('fb-comments').to('url').as 'data-href'
     @templates.preview.map.class('url').to('url').as 'href'
-    
+
   setWaypoint: =>
     callback = (event, direction) => 
       if direction is 'down' and @currentTab
