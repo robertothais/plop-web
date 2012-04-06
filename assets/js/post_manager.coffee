@@ -81,6 +81,7 @@ class Plop.PostManager extends EventEmitter
     $('#loader').hide()
     @app.router.on 'post:show:random', =>
       this.get '-random'
+    this.observeScroll()
 
   nextBatch: (callback) ->
     this.emit 'posts:get', 
@@ -331,3 +332,14 @@ class Plop.PostManager extends EventEmitter
         offset: 'bottom-in-view'
         onlyOnScroll: true
         triggerOnce: true
+
+  observeScroll: ->
+    elem = $('#back-to-top')
+    $(window).scroll ->
+      if $(this).scrollTop() > 1000
+        elem.removeClass('offscreen')
+      else         
+        if !elem.hasClass('offscreen')
+          elem.addClass('offscreen')
+    elem.click -> $('html,body').scrollTop 0
+
