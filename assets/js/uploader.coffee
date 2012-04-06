@@ -142,7 +142,7 @@ class Plop.Uploader extends EventEmitter
     else if assembly.error is 'FILE_FILTER_DECLINED_FILE'
       this.showError('file', 'El archivo que escogiste no es válido. Por favor escoge otro.')
     else
-      this.showError('file', 'Hubo un error al subir el archivo. Por favor escoge otro.')
+      this.showError('file', 'Hubo un error al subir el archivo. Por favor intenta de nuevo.')
       Hoptoad.notify
         message: "Upload error: #{assembly.error}"
         action: 'upload'
