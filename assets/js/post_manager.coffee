@@ -161,7 +161,8 @@ class Plop.PostManager extends EventEmitter
     this.emit 'upvote:create', id
 
   onUpvoteCreated: (id) =>
-    alert 'Upvote Saved!'
+    @cache[id].votes++
+    $("[data-post-id=#{id}]").find('.votes').text(@cache[id].votes)
 
   render: (post, templateName) ->    
     data = this.prepareForRender post, templateName
