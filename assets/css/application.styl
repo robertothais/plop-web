@@ -33,6 +33,13 @@ html, body
 
 body
   background-color #F2F3F4
+
+// IE 8 fix for png images with max-width: 100%;
+// as defined in reset. We don't need responsive
+// images anyway, since their containers aren't
+// resizable.
+img
+  max-width none
   
 .wrapper
   min-height 100%
