@@ -1,3 +1,7 @@
+// MODIFIED - Make sure Mapper instantiates an object with all of its methods under IE 8 and lower.
+// Minification breaks instantiation when we have constructor declarations like 
+// var Mapper = function Mapper() { ... }
+
 var Plates = (typeof process !== 'undefined' && typeof process.title !== 'undefined') ? exports : {};
 
 !function(exports) {
@@ -303,7 +307,7 @@ var Plates = (typeof process !== 'undefined' && typeof process.title !== 'undefi
 
   };
 
-  var Mapper = function Mapper(conf) {
+  var Mapper = function (conf) {
     if (!(this instanceof Mapper)) { return new Mapper(conf); }
     this.mappings = [];
     this.conf = conf || {};
