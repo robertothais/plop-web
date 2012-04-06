@@ -49,6 +49,7 @@ class Plop.Session extends EventEmitter
     window.fbAsyncInit = =>
       FB.init
         appId: $("meta[property=fb\\:app_id]").attr('content')
+        channelUrl: "#{window.location.protocol}//#{window.location.host}/channel.html"
         status: true
         xfbml: true
 

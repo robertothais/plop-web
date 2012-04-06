@@ -15,7 +15,7 @@ io  = require('socket.io').listen app
 app.listen process.env.PORT
 
 app.configure ->
-  this.use express.logger('dev')
+  this.use express.logger('dev')  
   # Redirect if www
   this.use (req, res, next) ->
     if req.headers.host and match = req.headers.host.match /^www\./
@@ -23,6 +23,7 @@ app.configure ->
     else
       next()
   this.use express.responseTime()  
+  this.use express.static("#{__dirname}/../public", maxAge: 31557600000)
   this.use express.favicon "#{__dirname}/../assets/img/favicon.ico"  
   this.use require('connect-assets')
     servePath: 'http://static.plop.pe'
