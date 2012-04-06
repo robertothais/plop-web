@@ -5,4 +5,5 @@ Plop.Tracker =
     obj.push label if label
 
     _gaq.push obj
-    console.debug obj.slice(1).join(' -> ') if Plop.debug
+    if Plop.debug and console.debug?
+      console.debug obj.slice(1).join(' -> ') 

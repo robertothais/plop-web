@@ -43,7 +43,7 @@ class Plop.Session extends EventEmitter
     e = document.createElement 'script'
     e.id = 'facebook-jssdk'
     e.async = true
-    e.src = document.location.protocol + '//connect.facebook.net/es_LA/all.js'
+    e.src = '//connect.facebook.net/es_LA/all.js'
     document.getElementById('fb-root').appendChild e
 
     window.fbAsyncInit = =>

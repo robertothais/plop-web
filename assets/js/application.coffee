@@ -1,4 +1,5 @@
 #= require vendor/jquery
+#= require vendor/json2
 #= require vendor/bootstrap-tooltip
 #= require_tree vendor
 #= require_tree .
