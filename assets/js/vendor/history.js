@@ -2289,6 +2289,8 @@
 
                             // Update the Hash
                             History.setHash(iframeHash,false);
+                            // Fire statechange on next pass of onHashChange
+                            History.busy(false)
                         }
 
                         // Reset Running
