@@ -118,13 +118,23 @@ a:focus
   .nav-tabs
     margin-bottom 0
     border-bottom 0
-    font-weight bold
-    font-size 14px
+
+    & > li a
+      font-weight bold
+      font-size 14px
+
+  .nav-tabs > .active a, .nav-tabs > .active > a:hover
+    border 1px solid rgba(0, 0, 0, 0.1)
+    border-bottom-color: transparent
 
   .module
-    border-radius(0 5px 5px 5px)
+    border-radius(5px 5px 5px 5px)
     padding-left 0
     padding-right 0
+
+  .module[data-tab='hot']
+    border-radius(0px 5px 5px 5px)
+
 
 body.no-more-posts
   footer

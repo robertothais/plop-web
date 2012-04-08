@@ -107,6 +107,7 @@ class Plop.PostManager extends EventEmitter
   activateTab: (tab) ->
     $('#tabs').find("li").removeClass 'active'
     $('#tabs').find("li[data-tab-name=#{tab}]").addClass 'active'
+    @container.parent('.module').attr('data-tab', tab)
 
   get: (id, history = true, force = false) =>
     callback = (post) =>  
