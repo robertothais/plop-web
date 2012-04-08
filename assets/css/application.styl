@@ -7,9 +7,10 @@ $navbarBackgroundHighlight = #FF0400
 
 $errorText       = #DB0300
 $errorBorder     = #DB0300
-$linkColor       = #3ab4d7
-
 $blue            = #2A79B1
+$linkColor       = $blue
+
+
 
 @import 'bootstrap/reset'
 @import 'bootstrap/utilities'
@@ -379,6 +380,9 @@ h3 a
     padding-top 0
   form, .control-group:last-child
     margin-bottom 0
+
+  .bar
+    gradient-vertical(#52B2F2, $blue)
 
   .bar span
     display none
