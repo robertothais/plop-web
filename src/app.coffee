@@ -61,7 +61,7 @@ io.configure ->
 
 app.get "/", (req, res) ->
   res.render 'index',
-    title: '¡Plop! - Para que te caigas de risa'
+    title: '¡Plop! - Cáete de la risa'
     templates: templates
     sid: req.sessionID
 
