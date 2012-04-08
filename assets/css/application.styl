@@ -9,6 +9,8 @@ $errorText       = #DB0300
 $errorBorder     = #DB0300
 $linkColor       = #3ab4d7
 
+$blue            = #2A79B1
+
 @import 'bootstrap/reset'
 @import 'bootstrap/utilities'
 @import 'bootstrap/component-animations'
@@ -32,7 +34,7 @@ html, body
   height 100%  
 
 body
-  background-color #F2F3F4
+  background-color #EDEEEE
 
 // IE 8 fix for png images with max-width: 100%;
 // as defined in reset. We don't need responsive
@@ -55,6 +57,25 @@ img
 
 section.right
   padding-top 33px
+
+  hr
+    margin 12px 0 12px 0
+
+  .twitter-follow-button
+    width 225px
+    height 20px
+
+  .module.social
+    padding-right 11px
+
+    h4
+      margin-bottom 10px
+
+    
+  .module 
+    @css { box-shadow:0 1px #EEEEEE, 0 0 0 1px #FFFFFF inset; }
+    background-color #F7F8F9
+    text-shadow 0 1px 0 $white
 
 .showing-post section.right
   padding-top 0px

@@ -23,8 +23,8 @@ class Plop.PostManager extends EventEmitter
         title: 'Para que te caigas de la risa'
         path: '/'    
       new:
-        title: 'Lo nuevo'
-        path: '/nuevo'
+        title: 'Lo último'
+        path: '/ultimo'
 
     this.prepareMaps()
 
@@ -272,9 +272,9 @@ class Plop.PostManager extends EventEmitter
   shareOnTwitter: (id) =>
     params = 
       url: this.url(id)
-      via: 'plopperu'
+      via: 'plop_pe'
       text: @cache[id].title
-      related: 'plopperu:Para que te caigas de la risa'
+      related: 'plop_pe:Para que te caigas de la risa'
     Plop.Util.showPopup "https://twitter.com/share?#{$.param(params)}"
 
   promptFacebookShare: ->

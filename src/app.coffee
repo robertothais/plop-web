@@ -65,9 +65,9 @@ app.get "/", (req, res) ->
     templates: templates
     sid: req.sessionID
 
-app.get "/nuevo", (req, res) ->
+app.get "/ultimo", (req, res) ->
   res.render 'index',
-    title: '¡Plop! - Lo nuevo'
+    title: '¡Plop! - Lo último'
     templates: templates
     sid: req.sessionID
 
