@@ -265,10 +265,10 @@ class Plop.PostManager extends EventEmitter
       link: this.url(id)
       name: @cache[id].title
       picture: Plop.Util.assetUrl @cache[id].images.medium
-      caption: 'Esto y más en plop.pe'
+      caption: 'Esto y más en ¡Plop!'
       display: (if @currentPost? then 'dialog' else 'popup')
       (response) =>
-        console.log(response)
+        console.log(response) if console.log?
 
   shareOnTwitter: (id) =>
     params = 
