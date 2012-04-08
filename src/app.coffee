@@ -65,11 +65,19 @@ app.get "/", (req, res) ->
     templates: templates
     sid: req.sessionID
 
-app.get "/ultimo", (req, res) ->
+app.get "/nuevo", (req, res) ->
   res.render 'index',
-    title: '¡Plop! - Lo último'
+    title: '¡Plop! - Lo nuevo'
     templates: templates
     sid: req.sessionID
+
+app.get "/ruleta", (req, res) ->
+  Post.random (err, post) =>
+    if err or !post
+        process.reportError err if err
+        res.send(404)
+      else
+        res.redirect "/r/#{post.shortCode}"
 
 app.get "/templates/:template", (req, res) ->
   templates.send req.params.template, res

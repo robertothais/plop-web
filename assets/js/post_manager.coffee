@@ -23,8 +23,8 @@ class Plop.PostManager extends EventEmitter
         title: 'Para que te caigas de la risa'
         path: '/'    
       new:
-        title: 'Lo último'
-        path: '/ultimo'
+        title: 'Lo nuevo'
+        path: '/nuevo'
 
     this.prepareMaps()
 

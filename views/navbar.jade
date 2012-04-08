@@ -1,21 +1,26 @@
 nav#nav.navbar.navbar-fixed-top
   .navbar-inner
     .container
-      a.brand(href='#')
+      a.brand(href='/')
         img(src=img('logo-small.png'), alt='¡Plop!')
       ul.nav
+        li.index
+          a(href='/')             
+            img(src=img('plop-small.png'), alt='Ríete')
+            span Ríete
+        li.divider-vertical
         li.new-upload
           a(href='#') 
-            img(src=img('cloud.png'), alt='Subir')
-            span Subir
+            img(src=img('cloud.png'), alt='Sube')
+            span Sube
 
       ul.nav.pull-right.session
         li.random
-          a(href='#')
-            img(src=img('shuffle.png'), alt='Aleatorio')
+          a(href='/ruleta')
+            img(src=img('shuffle.png'), alt='Ruleta')
         li.divider-vertical
         li.login
-          a(href="#") Entrar
+          a(href="#") Entra
         li.user.dropdown   
           a.user.dropdown-toggle(href="#", data-toggle="dropdown")
             span.no-username Opciones
