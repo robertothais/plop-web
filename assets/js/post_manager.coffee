@@ -268,7 +268,7 @@ class Plop.PostManager extends EventEmitter
       caption: 'Esto y más en ¡Plop!'
       display: (if @currentPost? then 'dialog' else 'popup')
       (response) =>
-        console.log(response) if console.log?
+        Plop.log(response)
 
   shareOnTwitter: (id) =>
     params = 
