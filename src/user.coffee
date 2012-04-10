@@ -55,5 +55,3 @@ schema.methods.toJson = (obj) ->
   
 module.exports.schema = schema
 module.exports.model  = mongoose.model 'User', schema
-
-#{"error_code":1,"error_msg":"An unknown error occurred"}

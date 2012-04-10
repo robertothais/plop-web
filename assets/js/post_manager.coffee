@@ -77,6 +77,8 @@ class Plop.PostManager extends EventEmitter
 
     @app.router.on 'tab:load', this.loadTab
 
+    @app.session.on 'facebook:edge.create', this.upvoteFromLike
+
   onReady: => 
     $('#loader').hide()
     @app.router.on 'post:show:random', =>
@@ -180,6 +182,11 @@ class Plop.PostManager extends EventEmitter
     data.url = this.url post.id 
     data.votes = Plop.Util.addCommas data.votes
     $.extend data, post.creator
+
+  upvoteFromLike: (url) =>
+    data = this.parseUrl url
+    if data.isPost
+      this.upvote data.postId
 
   setCurrentPost: (post, node) ->
     @currentPost =
@@ -304,6 +311,7 @@ class Plop.PostManager extends EventEmitter
         out.isTab = true
         out.tab = name
         return out
+    return out
 
   getPath: (urlString) ->
     url = $.parseUrl urlString
@@ -322,6 +330,7 @@ class Plop.PostManager extends EventEmitter
       map.class('image').to('imageUrl').as 'src' 
       map.class(type).to('id').as 'data-post-id'
     @templates.post.map.class('fb-comments').to('url').as 'data-href'
+    @templates.post.map.class('fb-like').to('url').as 'data-href'
     @templates.preview.map.class('url').to('url').as 'href'
 
   setWaypoint: =>
@@ -343,4 +352,3 @@ class Plop.PostManager extends EventEmitter
         if !elem.hasClass('offscreen')
           elem.addClass('offscreen')
     elem.click -> $('html,body').scrollTop 0
-

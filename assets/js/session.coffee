@@ -56,6 +56,10 @@ class Plop.Session extends EventEmitter
       FB.Event.subscribe 'auth.authResponseChange', (res) =>
          this.onAuthResponseChange res
 
+      FB.Event.subscribe 'edge.create', (res) =>
+        Plop.Tracker.event('Facebook', 'like', res)
+        this.emit 'facebook:edge.create', res
+
   onAuthResponseChange: (res) ->    
     switch res.status
       when 'connected'
