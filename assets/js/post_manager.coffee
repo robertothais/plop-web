@@ -20,7 +20,7 @@ class Plop.PostManager extends EventEmitter
 
     @tabs = 
       hot: 
-        title: 'Cáete de la risa'
+        title: 'Te vas a caer de la risa'
         path: '/'    
       new:
         title: 'Lo nuevo'
@@ -282,7 +282,7 @@ class Plop.PostManager extends EventEmitter
       url: this.url(id)
       via: 'plop_pe'
       text: @cache[id].title
-      related: 'plop_pe:Cáete de la risa'
+      related: 'plop_pe:Te vas a caer de la risa'
     Plop.Util.showPopup "https://twitter.com/share?#{$.param(params)}"
 
   promptFacebookShare: ->
