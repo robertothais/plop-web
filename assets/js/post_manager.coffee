@@ -184,6 +184,7 @@ class Plop.PostManager extends EventEmitter
     $.extend data, post.creator
 
   upvoteFromLike: (url) =>
+    return unless @app.session.authenticated
     data = this.parseUrl url
     if data.isPost
       this.upvote data.postId
