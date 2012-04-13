@@ -14,8 +14,7 @@ class Plop.Router extends EventEmitter
     this.addEvent 'click', 'a.brand', 'index:show'
     this.addEvent 'click', 'li.index a', 'index:show'
 
-    this.addEvent 'click', ['#posts', 'article.preview a.title'],   'post:show', this.postId
-    this.addEvent 'click', ['#posts', 'article.preview img.image'], 'post:show', this.postId
+    this.addEvent 'click', ['#posts', 'article.preview a.url'],   'post:show', this.postId
 
     this.addEvent 'click', 'li.random a', 'post:show:random'
 
