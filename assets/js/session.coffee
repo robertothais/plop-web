@@ -61,20 +61,18 @@ class Plop.Session extends EventEmitter
         this.emit 'facebook:edge.create', res
 
   onAuthResponseChange: (res) ->    
-    switch res.status
-      when 'connected'
-        $.when(@readyPromise).done =>
-          # We only give it a 5 second window to cache remote sessions
-          if @remoteUser and @remoteUser.facebookId is res.authResponse.userID and 
-          new Date - @remoteUser.lastSetAt < 5000
-            this.isAuthenticated()
-          else
-            this.showSpinner() if this.modalShown()
-            this.emit 'login', res.authResponse.accessToken
-            
-      when 'not_authorized', 'unknown'
-        this.emit 'logout' if @authenticated
-        this.resetAuthenticationState()
+    if res.authResponse
+      $.when(@readyPromise).done =>
+        # We only give it a 5 second window to cache remote sessions
+        if @remoteUser and @remoteUser.facebookId is res.authResponse.userID and 
+        new Date - @remoteUser.lastSetAt < 5000
+          this.isAuthenticated()
+        else
+          this.showSpinner() if this.modalShown()
+          this.emit 'login', res.authResponse.accessToken            
+    else
+      this.emit 'logout' if @authenticated
+      this.resetAuthenticationState()
     @authResponse = res
 
   isReady: (remoteUser) ->
