@@ -90,14 +90,17 @@ app.get "/r/:shortCode", (req, res) ->
   Post.findOne(shortCode: req.params.shortCode)
     .populate('creator')
     .exec (err, doc) ->
-      if err or !doc
-        process.reportError err if err
-        res.send(404)
-      else
-        res.render 'index', 
-          post: doc
-          templates: templates
-          sid: req.sessionID
+      if err 
+        process.reportError
+        res.send 500
+        return
+      if !doc
+        res.redirect '/'
+        return
+      res.render 'index', 
+        post: doc
+        templates: templates
+        sid: req.sessionID
 
 io.sockets.on 'connection', (socket) ->     
   new SocketApp(socket, sessionStore)
