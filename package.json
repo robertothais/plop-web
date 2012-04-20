@@ -1,6 +1,6 @@
 {
   "description": "Plop",
-  "version": "0.1.0-224",
+  "version": "0.1.0-225",
   "private": true,
   "dependencies": {
     "async": "0.1.18",
@@ -15,7 +15,7 @@
     "connect-redis": "1.2.x",
     "redis": "0.7.x",
     "coffee-script": "1.3.1",
-    "airbrake": "git://github.com/rpbertp13/node-airbrake.git"
+    "airbrake": "git://github.com/rthais/node-airbrake.git"
   },
   "devDependencies": {
     "api-easy": "0.3.2",
